@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeartMap — Relationship Wellness</title>
+  <meta name="description" content="HeartMap is a premium-feeling relationship wellness app that helps couples reflect on patterns, build personalized check-ins, and stay emotionally connected." />
+  <meta name="theme-color" content="#9b87e0" />
+  <meta property="og:title" content="HeartMap — Relationship Wellness" />
+  <meta property="og:description" content="A warm, emotionally intelligent relationship check-in experience for couples." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<!-- ===== LANDING SCREEN ===== -->
+<div id="landing" class="screen active">
+
+  <!-- Hero -->
+  <section class="landing-hero">
+    <div class="logo-mark">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 28C18 28 6 21 6 13.5C6 10.46 8.46 8 11.5 8C13.74 8 15.68 9.34 16.66 11.26L18 13.5L19.34 11.26C20.32 9.34 22.26 8 24.5 8C27.54 8 30 10.46 30 13.5C30 21 18 28 18 28Z" fill="white" opacity="0.9"/>
+      </svg>
+    </div>
+
+    <p class="hero-eyebrow">A relationship wellness experience</p>
+
+    <h1 class="hero-title">
+      Heart<em>Map</em>
+    </h1>
+
+    <p class="hero-subtitle">
+      Turn relationship tension into clarity. A gentle, guided space to understand your patterns, 
+      build intentional check-ins, and nurture what matters most between you.
+    </p>
+
+    <div class="hero-cta-group">
+      <button class="btn-primary" onclick="showScreen('pricing-screen')">Unlock Full Experience</button>
+      <button class="btn-secondary" onclick="showScreen('pricing-screen')">View Plans</button>
+    </div>
+
+    <div class="hero-trust-badges">
+      <span class="trust-badge"><span class="dot"></span> Emotionally intelligent</span>
+      <span class="trust-badge"><span class="dot"></span> Research-informed</span>
+      <span class="trust-badge"><span class="dot"></span> Private & secure</span>
+      <span class="trust-badge"><span class="dot"></span> No therapy jargon</span>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="landing-features">
+    <p class="section-label">What you get</p>
+    <h2 class="section-title">Everything your relationship <em>deserves</em></h2>
+    <p class="section-subtitle">Not a quiz. Not a worksheet. A living, adaptive guide that grows with you.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon purple">🗺️</div>
+        <div class="feature-title">Relationship Map</div>
+        <p class="feature-desc">An interactive visual of your relationship's emotional landscape — where you're thriving, what needs attention, and what's been quietly avoided.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon pink">✨</div>
+        <div class="feature-title">Personalized Check-In Builder</div>
+        <p class="feature-desc">Based on your current season — whether it's smooth, stormy, or somewhere in between — the app builds you a custom conversation guide.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon gold">🌿</div>
+        <div class="feature-title">Activity Pairings</div>
+        <p class="feature-desc">The right conversation is easier after the right moment. We suggest activities that soften tension and open connection before you begin.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon rose">📈</div>
+        <div class="feature-title">Pattern Tracking</div>
+        <p class="feature-desc">See how your relationship evolves over time. Spot what keeps surfacing, what's improving, and what you've healed together.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blurred Preview -->
+  <section class="preview-section">
+    <p class="section-label">Sneak peek</p>
+    <h2 class="section-title">A glimpse of <em>your</em> dashboard</h2>
+    <p class="section-subtitle">Unlock the full experience to see your complete relationship map and personalized check-in.</p>
+
+    <div class="preview-cards">
+      <div class="preview-card">
+        <div class="preview-card-label">Relationship Pulse</div>
+        <div class="mini-pulse">
+          <div class="mini-bar lavender" style="height:75%"></div>
+          <div class="mini-bar rose" style="height:55%"></div>
+          <div class="mini-bar lavender" style="height:80%"></div>
+          <div class="mini-bar gold" style="height:60%"></div>
+          <div class="mini-bar lavender" style="height:70%"></div>
+          <div class="mini-bar rose" style="height:45%"></div>
+          <div class="mini-bar lavender" style="height:85%"></div>
+        </div>
+        <div class="preview-stat">72</div>
+        <div class="preview-stat-label">Connection score this week</div>
+      </div>
+
+      <div class="preview-card locked">
+        <div class="preview-card-label">This Week's Check-In</div>
+        <div style="font-family:var(--font-display);font-size:1.2rem;color:var(--text-dark);margin-bottom:6px;">Connection Boost</div>
+        <div style="font-size:13px;color:var(--text-soft);margin-bottom:10px;font-weight:300;">25 min · Weekly · Light-Moderate</div>
+        <div style="font-size:13px;color:var(--text-mid);font-weight:300;line-height:1.5;">Start with an evening walk, then move into 4 gentle prompts about…</div>
+        <div class="lock-badge">🔒 Unlock to see</div>
+      </div>
+
+      <div class="preview-card locked">
+        <div class="preview-card-label">Main Themes</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
+          <span class="pill-tag strength">Quality Time</span>
+          <span class="pill-tag attention">Communication</span>
+          <span class="pill-tag growing">Future Goals</span>
+        </div>
+        <div style="font-size:13px;color:var(--text-soft);font-weight:300;line-height:1.5;">3 areas surfacing this week. Personalized questions for each…</div>
+        <div class="lock-badge">🔒 Unlock to see</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing teaser -->
+  <section style="padding:3rem 2rem 5rem;text-align:center;">
+    <h2 class="section-title" style="margin-bottom:0.8rem;">Invest in <em>you, together</em></h2>
+    <p style="font-size:16px;color:var(--text-mid);max-width:400px;margin:0 auto 2rem;font-weight:300;line-height:1.65;">
+      One relationship. One space. Built with care, designed for intimacy, and worth every moment.
+    </p>
+    <button class="btn-primary" onclick="showScreen('pricing-screen')" style="font-size:16px;padding:16px 40px;">
+      Get Started — See Plans
+    </button>
+    <p style="margin-top:1rem;font-size:13px;color:var(--text-light);">Have an access code? <span class="inline-link" onclick="showScreen('pricing-screen')">Enter it here</span></p>
+  </section>
+
+  <!-- Safety note -->
+  <div style="max-width:600px;margin:0 auto;padding:0 2rem 3rem;">
+    <div class="safety-note">
+      <p><strong>A gentle note:</strong> HeartMap is a relationship reflection and communication support tool. It is not a replacement for therapy, counseling, or crisis support. If you or your partner feel unsafe in any way, please reach out to a trusted professional or call a crisis line.</p>
+    </div>
+  </div>
+
+</div><!-- end landing -->
+
+<!-- ===== PRICING SCREEN ===== -->
+<div id="pricing-screen" class="screen">
+  <div style="max-width:900px;margin:0 auto;padding:2rem;">
+
+    <div class="pricing-back" onclick="showScreen('landing')">
+      ← Back
+    </div>
+
+    <p class="section-label" style="text-align:left;">Choose your path</p>
+    <h2 class="section-title" style="text-align:left;margin-bottom:0.5rem;">Begin your <em>HeartMap</em> journey</h2>
+    <p style="font-size:15px;color:var(--text-mid);font-weight:300;margin-bottom:2.5rem;">
+      Premium-feeling, intentionally designed, worth every penny.
+    </p>
+
+    <div class="pricing-grid">
+
+      <div class="pricing-card" onclick="openCheckout('monthly')">
+        <div class="pricing-plan-name">Monthly</div>
+        <p class="pricing-plan-desc">Flexible access. Great for couples exploring the app together or through seasonal needs.</p>
+        <div class="pricing-amount">
+          <span class="price">$14</span>
+          <span class="period">/month</span>
+        </div>
+        <ul class="pricing-features">
+          <li>Full relationship intake</li>
+          <li>Interactive relationship map</li>
+          <li>Personalized check-in builder</li>
+          <li>Guided conversation mode</li>
+          <li>Activity pairing suggestions</li>
+          <li>Progress history & trends</li>
+        </ul>
+        <button class="btn-secondary" style="width:100%">Get Monthly Access</button>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="popular-badge">✦ Most Loved</div>
+        <div class="pricing-plan-name">Annual</div>
+        <p class="pricing-plan-desc">Best value. A full year of intentional check-ins, growth tracking, and relationship care.</p>
+        <div class="pricing-amount">
+          <span class="price">$99</span>
+          <span class="period">/year · save 41%</span>
+        </div>
+        <ul class="pricing-features">
+          <li>Everything in Monthly</li>
+          <li>Both partners' view</li>
+          <li>Downloadable summaries</li>
+          <li>Premium customization</li>
+          <li>Seasonal relationship resets</li>
+          <li>Priority support</li>
+        </ul>
+        <button class="btn-primary" style="width:100%" onclick="event.stopPropagation();openCheckout('annual')">Get Annual Access</button>
+      </div>
+
+      <div class="pricing-card" onclick="openCheckout('couple')">
+        <div class="pricing-plan-name">Couples Plan</div>
+        <p class="pricing-plan-desc">One shared plan, both partners fully synced. Includes comparison views and partner invites.</p>
+        <div class="pricing-amount">
+          <span class="price">$149</span>
+          <span class="period">/year for 2</span>
+        </div>
+        <ul class="pricing-features">
+          <li>Everything in Annual</li>
+          <li>Partner sync & invite</li>
+          <li>Side-by-side reflection views</li>
+          <li>Shared relationship history</li>
+          <li>Joint check-in mode</li>
+          <li>Therapist export summaries</li>
+        </ul>
+        <button class="btn-secondary" style="width:100%">Get Couples Access</button>
+      </div>
+
+      </div>
+
+    </div>
+
+    <!-- Access Code -->
+    <div class="code-section">
+      <h3>Have an access code?</h3>
+      <p>Enter your invite code, promo code, or gift access below.</p>
+      <div class="code-input-row">
+        <input type="text" class="code-input" id="access-code-input" placeholder="XXXX-XXXX" maxlength="12" oninput="this.value=this.value.toUpperCase()" />
+        <button class="btn-primary" style="padding:11px 20px;font-size:14px;" onclick="validateCode()">Redeem</button>
+      </div>
+      <div class="code-error" id="code-error">That code doesn't look right. Please try again or check your email.</div>
+    </div>
+
+    <p style="text-align:center;font-size:13px;color:var(--text-light);">
+      Already purchased? <span class="inline-link" onclick="enterApp()">Log in here</span>
+    </p>
+
+  </div>
+</div>
+
+<!-- ===== CHECKOUT MODAL ===== -->
+<div class="modal-overlay" id="checkout-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeCheckout()">✕</button>
+
+    <div class="checkout-summary" id="checkout-summary">
+      <span class="plan-name">Annual Plan</span>
+      <span class="plan-price">$99</span>
+    </div>
+
+    <h2 class="modal-title">Complete Your Order</h2>
+    <p class="modal-subtitle">You're moments away from a more intentional relationship.</p>
+
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input type="email" class="form-input" placeholder="you@email.com" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <input type="text" class="form-input" placeholder="Your name" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Card Number</label>
+      <input type="text" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19" />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Expiry</label>
+        <input type="text" class="form-input" placeholder="MM / YY" maxlength="7" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">CVV</label>
+        <input type="text" class="form-input" placeholder="•••" maxlength="4" />
+      </div>
+    </div>
+
+    <button class="btn-primary" style="width:100%;font-size:16px;padding:15px;" onclick="completePayment()">
+      Complete Purchase & Unlock Access
+    </button>
+
+    <div class="secure-note">
+      <span>🔒</span>
+      <span>Secured with 256-bit encryption · Cancel anytime</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN APP SCREEN ===== -->
+<div id="app-screen" class="screen">
+
+  <!-- Top Nav -->
+  <nav class="app-topnav">
+    <div class="app-logo" onclick="switchTab('home')">
+      HeartMap <span class="heart-dot"></span>
+    </div>
+
+    <div class="app-topnav-tabs" id="desktop-tabs">
+      <button class="topnav-tab active" onclick="switchTab('home')" data-tab="home">Home</button>
+      <button class="topnav-tab" onclick="switchTab('map')" data-tab="map">Map</button>
+      <button class="topnav-tab" onclick="switchTab('intake')" data-tab="intake">Reflect</button>
+      <button class="topnav-tab" onclick="switchTab('builder')" data-tab="builder">Check-In</button>
+      <button class="topnav-tab" onclick="switchTab('guide')" data-tab="guide">Guide</button>
+      <button class="topnav-tab" onclick="switchTab('activities')" data-tab="activities">Activities</button>
+      <button class="topnav-tab" onclick="switchTab('history')" data-tab="history">History</button>
+      <button class="topnav-tab" onclick="switchTab('settings')" data-tab="settings">Settings</button>
+    </div>
+
+    <div class="topnav-actions">
+      <div class="avatar-chip">A</div>
+    </div>
+  </nav>
+
+  <!-- App Content -->
+  <div class="app-content">
+
+    <!-- ========== HOME TAB ========== -->
+    <div id="tab-home" class="tab-panel active">
+
+      <div class="welcome-banner">
+        <p class="welcome-greeting">Good evening, Alex</p>
+        <h2 class="welcome-title">Your relationship is a living thing.</h2>
+        <p class="welcome-message">You've been together 3 years. This week, we're noticing some themes around connection and communication worth gently exploring.</p>
+      </div>
+
+      <!-- Pulse Meter -->
+      <div class="pulse-meter">
+        <div class="pulse-label">Relationship Pulse — This Week</div>
+        <div class="pulse-bars" id="pulse-bars">
+          <!-- filled by JS -->
+        </div>
+        <div class="pulse-summary" id="pulse-summary">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <span class="stat-num" id="home-connection-score">72</span>
+          <span class="stat-label-sm">Connection Score</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="home-focus-areas">3</span>
+          <span class="stat-label-sm">Focus Areas</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="home-checkins-done">2</span>
+          <span class="stat-label-sm">Check-ins done</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" style="font-size:1.4rem;" id="home-next-checkin">Fri</span>
+          <span class="stat-label-sm">Next check-in</span>
+        </div>
+      </div>
+
+      <!-- Check-In Recommendation -->
+      <div class="checkin-rec">
+        <div class="checkin-type-badge">✦ This Week's Recommendation</div>
+        <h3 class="checkin-rec-title" id="home-rec-title">Connection Boost Check-In</h3>
+        <p class="checkin-rec-desc" id="home-rec-desc">You've been navigating a mildly busy season. A light-to-moderate check-in will help you stay tuned in without adding pressure. Focus on appreciation, what's working, and one gentle exploration of communication.</p>
+        <div class="checkin-meta" id="home-rec-meta">
+          <span class="meta-chip">⏱ 25–35 minutes</span>
+          <span class="meta-chip">📅 Weekly</span>
+          <span class="meta-chip">🌙 Light-Moderate</span>
+          <span class="meta-chip">🌿 Cozy setting</span>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn-primary" onclick="switchTab('guide')">Start Conversation</button>
+          <button class="btn-secondary" onclick="switchTab('builder')">View Full Plan</button>
+        </div>
+      </div>
+
+      <!-- Activity Pairing -->
+      <div class="activity-rec">
+        <div class="activity-icon" id="home-activity-icon">🍵</div>
+        <div>
+          <div class="activity-rec-title" id="home-activity-title">Tea & Soft Light Check-In</div>
+          <p class="activity-rec-desc" id="home-activity-desc">Make two mugs, light a candle, settle in together. The warmth and ritual create a gentle container for conversation.</p>
+        </div>
+      </div>
+
+      <p class="microcopy">"A little structure can make hard conversations softer."</p>
+
+      <div class="card">
+        <div class="card-title">Strengths to Protect</div>
+        <p class="card-subtitle" style="margin-bottom:0.8rem;">These areas are carrying your relationship right now. Acknowledge them.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;" id="home-strengths">
+          <span class="pill-tag strength">Emotional Safety</span>
+          <span class="pill-tag strength">Shared Humor</span>
+          <span class="pill-tag strength">Trust</span>
+          <span class="pill-tag growing">Future Vision</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Soft Places to Start</div>
+        <p class="card-subtitle">Try opening your next check-in with one of these gentle openers:</p>
+        <div style="margin-top:0.8rem;" id="home-openers">
+          <div class="guide-prompt">"What's one moment from this week you want me to know about?"</div>
+          <div class="guide-prompt">"What have you needed more of lately that you haven't said out loud?"</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========== MAP TAB ========== -->
+    <div id="tab-map" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Your Relationship Map</h2>
+        <p class="tab-header-sub">A living view of your emotional landscape. Tap any area to explore.</p>
+      </div>
+
+      <div class="map-container">
+        <div class="map-svg-wrap">
+          <svg id="radar-chart" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+        <div class="map-legend">
+          <span class="legend-item"><span class="legend-dot" style="background:var(--lavender-deep)"></span>Thriving</span>
+          <span class="legend-item"><span class="legend-dot" style="background:var(--gold)"></span>Stable</span>
+          <span class="legend-item"><span class="legend-dot" style="background:var(--rose)"></span>Needs Attention</span>
+          <span class="legend-item"><span class="legend-dot" style="background:var(--dusty-rose)"></span>Tense</span>
+        </div>
+      </div>
+
+      <div class="map-categories" id="map-categories">
+        <!-- filled by JS -->
+      </div>
+
+      <p class="microcopy" style="margin-top:1rem;">"Your relationship has patterns. Let's make them easier to understand."</p>
+
+    </div>
+
+    <!-- ========== INTAKE TAB ========== -->
+    <div id="tab-intake" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Reflection Questions</h2>
+        <p class="tab-header-sub">Let's gently map what's been happening lately.</p>
+      </div>
+
+      <div class="intake-progress">
+        <div class="progress-bar-outer">
+          <div class="progress-bar-inner" id="intake-progress-bar" style="width:15%"></div>
+        </div>
+        <div class="progress-text" id="intake-progress-text">2 of 12</div>
+      </div>
+
+      <div id="intake-questions">
+        <!-- filled by JS -->
+      </div>
+
+      <div class="intake-nav" id="intake-nav">
+        <button class="btn-secondary" id="intake-prev-btn" onclick="intakePrev()" style="display:none">← Back</button>
+        <button class="btn-primary" id="intake-next-btn" onclick="intakeNext()">Continue →</button>
+      </div>
+
+    </div>
+
+    <!-- ========== BUILDER TAB ========== -->
+    <div id="tab-builder" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Your Check-In Plan</h2>
+        <p class="tab-header-sub">Built around where you are right now.</p>
+      </div>
+
+      <div class="checkin-output">
+        <div class="checkin-output-type" id="builder-output-type">This Week · Connection Boost</div>
+        <h2 class="checkin-output-title" id="builder-output-title">A Gentle, Focused Check-In</h2>
+        <div class="checkin-output-meta" id="builder-output-meta">
+          <span class="meta-badge">⏱ 25–35 min</span>
+          <span class="meta-badge">📅 Weekly</span>
+          <span class="meta-badge">🌿 Light-Moderate</span>
+          <span class="meta-badge">🕯️ Cozy atmosphere</span>
+        </div>
+        <button class="btn-primary" onclick="switchTab('guide')">Open Conversation Guide →</button>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:1rem;">Conversation Themes</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem;" id="builder-theme-tags">
+          <span class="pill-tag strength">Appreciation</span>
+          <span class="pill-tag attention">Communication</span>
+          <span class="pill-tag growing">Quality Time</span>
+        </div>
+        <p class="card-subtitle" id="builder-theme-desc">This week, your check-in will move through appreciation first — then gently explore one area of communication tension, and close with a shared vision moment.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:0.8rem;">Your Questions This Week</div>
+        <ul class="questions-list" id="builder-questions">
+          <!-- filled by JS -->
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:0.6rem;">Emotional Pacing Notes</div>
+        <p class="card-subtitle" id="builder-pacing">One partner leans slightly anxious-attached; the other tends to need space first. Open with warmth, allow pauses, and avoid stacking questions. If things get heavy, name it and take a 2-minute breather.</p>
+      </div>
+
+      <div class="card" style="border-color:rgba(201,169,110,0.3);">
+        <div class="card-title" style="margin-bottom:0.6rem;">Closing Ritual Suggestion</div>
+        <p class="card-subtitle" id="builder-closing">End with three genuine appreciations — one from each of you, plus one thing you're looking forward to together. Keep it simple, but feel it.</p>
+      </div>
+
+    </div>
+
+    <!-- ========== GUIDE TAB ========== -->
+    <div id="tab-guide" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Conversation Guide</h2>
+        <p class="tab-header-sub">Open these together. Move at your own pace.</p>
+      </div>
+
+      <div class="checkin-rec" style="margin-bottom:1rem;">
+        <p style="font-size:13px;color:var(--text-mid);font-weight:300;line-height:1.6;">
+          <em>You don't need to be in crisis to check in. This conversation is an act of care — for both of you.</em>
+        </p>
+      </div>
+
+      <!-- Opening -->
+      <div class="guide-section open">
+        <div class="guide-section-header" onclick="toggleGuideSection(this)">
+          <div class="guide-section-title">
+            <div class="guide-icon open-icon">🌿</div>
+            Opening & Grounding
+          </div>
+          <svg class="guide-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="guide-section-body">
+          <p style="font-size:13.5px;color:var(--text-soft);font-weight:300;line-height:1.6;padding-top:0.8rem;">Before you begin, take a breath together. You're not here to solve everything — just to be here.</p>
+          <div class="guide-prompt">"Before we start, how are you actually feeling right now — body, mind, all of it?"</div>
+          <div class="guide-prompt">"Is there anything you want to say you need from this conversation before we begin?"</div>
+        </div>
+      </div>
+
+      <!-- Appreciation -->
+      <div class="guide-section">
+        <div class="guide-section-header" onclick="toggleGuideSection(this)">
+          <div class="guide-section-title">
+            <div class="guide-icon warm-icon">🌸</div>
+            Appreciation
+          </div>
+          <svg class="guide-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="guide-section-body">
+          <div class="guide-prompt">"What's something you did this week that I want you to know I noticed?"</div>
+          <div class="guide-prompt">"When did I feel most like myself around you recently?"</div>
+        </div>
+      </div>
+
+      <!-- Current Themes -->
+      <div class="guide-section">
+        <div class="guide-section-header" onclick="toggleGuideSection(this)">
+          <div class="guide-section-title">
+            <div class="guide-icon deep-icon">💬</div>
+            Current Themes
+          </div>
+          <svg class="guide-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="guide-section-body">
+          <p style="font-size:13px;color:var(--text-soft);font-weight:300;padding-top:0.8rem;margin-bottom:0.2rem;line-height:1.5;font-style:italic;">Based on your reflections, this area is gently surfacing. Go slowly.</p>
+          <div class="guide-prompt">"Have you felt heard by me this week? If not, when did that show up?"</div>
+          <div class="guide-prompt">"Is there something you've been carrying that I don't know about?"</div>
+          <div class="guide-prompt">"What would more connection look like for you right now — practically?"</div>
+        </div>
+      </div>
+
+      <!-- Repair (if needed) -->
+      <div class="guide-section">
+        <div class="guide-section-header" onclick="toggleGuideSection(this)">
+          <div class="guide-section-title">
+            <div class="guide-icon warm-icon">🩹</div>
+            Repair (if needed)
+          </div>
+          <svg class="guide-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="guide-section-body">
+          <div class="guide-prompt">"Is there anything from the last few weeks that felt unfinished between us?"</div>
+          <div class="guide-prompt">"What did you need from me in that moment that I didn't give you?"</div>
+        </div>
+      </div>
+
+      <!-- Forward -->
+      <div class="guide-section">
+        <div class="guide-section-header" onclick="toggleGuideSection(this)">
+          <div class="guide-section-title">
+            <div class="guide-icon deep-icon">🌅</div>
+            Looking Forward
+          </div>
+          <svg class="guide-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="guide-section-body">
+          <div class="guide-prompt">"What's one small thing we could do differently this coming week that would make us both feel better?"</div>
+          <div class="guide-prompt">"What are you looking forward to — together or apart — in the next few weeks?"</div>
+        </div>
+      </div>
+
+      <!-- Close -->
+      <div class="guide-section">
+        <div class="guide-section-header" onclick="toggleGuideSection(this)">
+          <div class="guide-section-title">
+            <div class="guide-icon close-icon">✨</div>
+            Closing Ritual
+          </div>
+          <svg class="guide-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="guide-section-body">
+          <p style="font-size:13px;color:var(--text-soft);font-weight:300;padding-top:0.8rem;line-height:1.5;font-style:italic;">End gently. You did something brave.</p>
+          <div class="guide-prompt">"What do we want to carry forward from this conversation?"</div>
+          <div class="guide-prompt">End with three appreciations — one each. Let them land.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:1rem;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn-primary" onclick="markCheckInDone()">✓ Mark Check-In Complete</button>
+        <button class="btn-secondary">Save Notes</button>
+      </div>
+
+    </div>
+
+    <!-- ========== ACTIVITIES TAB ========== -->
+    <div id="tab-activities" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Activity Pairings</h2>
+        <p class="tab-header-sub">The right moment makes the conversation easier.</p>
+      </div>
+
+      <p class="microcopy" style="text-align:left;padding:0;margin-bottom:1rem;" id="activities-intro">Based on your current season — light tension, moderate busyness — we suggest cozy, low-pressure pairings.</p>
+
+      <div id="activities-list"><div class="activity-card">
+        <div class="activity-card-icon warm">🍵</div>
+        <div>
+          <div class="activity-card-title">Tea & Soft Light</div>
+          <div class="activity-card-meta">
+            <span class="activity-tag when">Before check-in</span>
+            <span class="activity-tag time">20 min ritual</span>
+            <span class="activity-tag mood">Cozy & intimate</span>
+          </div>
+          <p class="activity-card-desc">Make tea together. Light something. Sit close. Let the warmth and quiet do the first work before you begin talking.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-card-icon light">🚶</div>
+        <div>
+          <div class="activity-card-title">Evening Walk</div>
+          <div class="activity-card-meta">
+            <span class="activity-tag when">During check-in</span>
+            <span class="activity-tag time">30–45 min</span>
+            <span class="activity-tag mood">Calm & open</span>
+          </div>
+          <p class="activity-card-desc">Walking side-by-side reduces face-to-face pressure and naturally opens conversation. Great for moderate topics.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-card-icon cozy">🍳</div>
+        <div>
+          <div class="activity-card-title">Cook Together First</div>
+          <div class="activity-card-meta">
+            <span class="activity-tag when">Before check-in</span>
+            <span class="activity-tag time">45 min</span>
+            <span class="activity-tag mood">Playful & connected</span>
+          </div>
+          <p class="activity-card-desc">Shared tasks lower cortisol. Cooking something simple together primes teamwork before you move into words.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-card-icon calm">🎵</div>
+        <div>
+          <div class="activity-card-title">Playlist + Quiet Drive</div>
+          <div class="activity-card-meta">
+            <span class="activity-tag when">Before or after</span>
+            <span class="activity-tag time">20–40 min</span>
+            <span class="activity-tag mood">Soft & decompressing</span>
+          </div>
+          <p class="activity-card-desc">Share a playlist you've been listening to separately. Let the music hold the space. Talk when you want, not because you have to.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-card-icon warm">🍦</div>
+        <div>
+          <div class="activity-card-title">Dessert Run</div>
+          <div class="activity-card-meta">
+            <span class="activity-tag when">After check-in</span>
+            <span class="activity-tag time">30 min</span>
+            <span class="activity-tag mood">Light & rewarding</span>
+          </div>
+          <p class="activity-card-desc">A playful treat after a meaningful conversation signals: we did something together, and now we get to enjoy each other.</p>
+        </div>
+      </div>
+
+    </div>
+
+    </div>
+
+    <!-- ========== HISTORY TAB ========== -->
+    <div id="tab-history" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Patterns Over Time</h2>
+        <p class="tab-header-sub">Notice what keeps surfacing — and what you've healed.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:1rem;">Relationship Trends — Last 8 Weeks</div>
+        <div id="trend-rows"><!-- filled by JS --></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:0.8rem;">Recurring Themes</div>
+        <p class="card-subtitle" style="margin-bottom:0.8rem;">These areas have come up in 3 or more check-ins:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="pill-tag attention">Communication rhythm</span>
+          <span class="pill-tag attention">Quality time</span>
+          <span class="pill-tag stable">Conflict repair</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:0.8rem;">Previous Check-Ins</div>
+        <div id="checkin-history"><!-- filled by JS --></div>
+      </div>
+
+    </div>
+
+    <!-- ========== SETTINGS TAB ========== -->
+    <div id="tab-settings" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Settings</h2>
+        <p class="tab-header-sub">Make HeartMap feel like yours.</p>
+      </div>
+
+      <div class="card">
+
+        <div class="settings-section-title">Personalization</div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Include Intimacy Questions</div>
+            <div class="toggle-row-sub">Adds physical intimacy prompts to reflections</div>
+          </div>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Include Family Dynamics</div>
+            <div class="toggle-row-sub">Factors in in-law and family stress</div>
+          </div>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Partner Mode</div>
+            <div class="toggle-row-sub">Both partners fill out reflections separately</div>
+          </div>
+          <button class="toggle" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+        <div class="settings-section-title">Check-In Preferences</div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Therapist-Inspired Tone</div>
+            <div class="toggle-row-sub">More structured, clinical-adjacent language</div>
+          </div>
+          <button class="toggle" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Playful Prompts</div>
+            <div class="toggle-row-sub">Add lighthearted and fun options</div>
+          </div>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+        <div class="settings-section-title">Privacy</div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Anonymous Analytics</div>
+            <div class="toggle-row-sub">Help improve HeartMap (no personal data)</div>
+          </div>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Require PIN to Open</div>
+            <div class="toggle-row-sub">Extra privacy layer for the app</div>
+          </div>
+          <button class="toggle" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+      </div>
+
+      <div class="safety-note">
+        <p><strong>Safety reminder:</strong> HeartMap is a relationship communication and reflection tool. If you or your partner feel unsafe, coerced, or afraid, please reach out to a trusted professional. You deserve care that goes beyond an app.</p>
+      </div>
+
+      <div style="margin-top:1rem;text-align:center;">
+        <button class="btn-ghost" onclick="showScreen('landing')">← Back to Marketing Site</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Nav (mobile) -->
+  <nav class="app-bottomnav">
+    <button class="nav-tab active" onclick="switchTab('home')" data-tab="home">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('map')" data-tab="map">
+      <span class="nav-icon">◎</span>
+      <span class="nav-label">Map</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('intake')" data-tab="intake">
+      <span class="nav-icon">✎</span>
+      <span class="nav-label">Reflect</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('builder')" data-tab="builder">
+      <span class="nav-icon">❋</span>
+      <span class="nav-label">Check-In</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('guide')" data-tab="guide">
+      <span class="nav-icon">♡</span>
+      <span class="nav-label">Guide</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('activities')" data-tab="activities">
+      <span class="nav-icon">⬡</span>
+      <span class="nav-label">Activities</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('history')" data-tab="history">
+      <span class="nav-icon">↻</span>
+      <span class="nav-label">History</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('settings')" data-tab="settings">
+      <span class="nav-icon">⚙</span>
+      <span class="nav-label">Settings</span>
+    </button>
+  </nav>
+
+</div><!-- end app-screen -->
+<script src="assets/app.js"></script>
+</body>
+</html>

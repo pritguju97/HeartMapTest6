@@ -1,0 +1,3120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HeartMap — Relationship Wellness</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lavender: #e8e2f8;
+    --lavender-mid: #c4b5f0;
+    --lavender-deep: #9b87e0;
+    --lilac: #d4c8f5;
+    --blush: #f5e0eb;
+    --blush-mid: #e8b8d0;
+    --rose: #d4849e;
+    --dusty-rose: #c06b88;
+    --gold: #c9a96e;
+    --gold-light: #e8d5b0;
+    --cream: #faf7f2;
+    --warm-white: #fdfbf8;
+    --maroon: #8b3a52;
+    --text-dark: #2d1f35;
+    --text-mid: #5a4468;
+    --text-soft: #8a7a98;
+    --text-light: #b8adc8;
+    --card-bg: rgba(255,255,255,0.85);
+    --shadow-soft: 0 4px 24px rgba(120,80,140,0.10);
+    --shadow-card: 0 2px 16px rgba(100,60,120,0.08);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+    --radius-sm: 12px;
+    --radius-md: 18px;
+    --radius-lg: 28px;
+    --radius-xl: 40px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== BACKGROUND TEXTURE ===== */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 15% 20%, rgba(196,181,240,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 85% 80%, rgba(212,132,158,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 50%, rgba(232,210,176,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== SCREENS ===== */
+  .screen { display: none; position: relative; z-index: 1; }
+  .screen.active { display: block; }
+
+  /* ===== LANDING ===== */
+  #landing {
+    min-height: 100vh;
+  }
+
+  .landing-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .logo-mark {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, var(--lavender-deep), var(--dusty-rose));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(155,135,224,0.30);
+  }
+
+  .logo-mark svg { width: 36px; height: 36px; }
+
+  .hero-eyebrow {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--dusty-rose);
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-mid);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--lavender-deep), var(--dusty-rose));
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: var(--radius-xl);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 20px rgba(155,135,224,0.35);
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(155,135,224,0.45);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-mid);
+    border: 1.5px solid var(--lavender-mid);
+    padding: 13px 28px;
+    border-radius: var(--radius-xl);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-secondary:hover {
+    background: var(--lavender);
+    border-color: var(--lavender-deep);
+    color: var(--text-dark);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-soft);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius-xl);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--lavender-mid);
+  }
+
+  .btn-ghost:hover { color: var(--text-dark); }
+
+  .hero-trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-soft);
+    font-weight: 400;
+  }
+
+  .trust-badge span.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--lavender-deep);
+    display: inline-block;
+  }
+
+  .landing-features {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    text-align: center;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--dusty-rose); }
+
+  .section-subtitle {
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-mid);
+    max-width: 480px;
+    margin: 0 auto 3.5rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .feature-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(196,181,240,0.3);
+    backdrop-filter: blur(12px);
+    transition: transform 0.2s ease;
+  }
+
+  .feature-card:hover { transform: translateY(-3px); }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+    font-size: 22px;
+  }
+
+  .feature-icon.purple { background: var(--lavender); }
+  .feature-icon.pink { background: var(--blush); }
+  .feature-icon.gold { background: var(--gold-light); }
+  .feature-icon.rose { background: rgba(212,132,158,0.15); }
+
+  .feature-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 0.6rem;
+  }
+
+  .feature-desc {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .preview-section {
+    padding: 4rem 2rem 6rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .preview-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 3rem;
+    position: relative;
+  }
+
+  .preview-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    border: 1px solid rgba(196,181,240,0.35);
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .preview-card.locked::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 30%, rgba(250,247,242,0.96) 80%);
+    border-radius: var(--radius-md);
+  }
+
+  .preview-card.locked .lock-badge {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    background: linear-gradient(135deg, var(--lavender-deep), var(--dusty-rose));
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+
+  .preview-card-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+  }
+
+  .mini-pulse {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 48px;
+    margin-bottom: 0.8rem;
+  }
+
+  .mini-bar {
+    flex: 1;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.5s ease;
+  }
+
+  .mini-bar.lavender { background: var(--lavender-deep); }
+  .mini-bar.rose { background: var(--rose); }
+  .mini-bar.gold { background: var(--gold); }
+
+  .preview-stat { font-family: var(--font-display); font-size: 2rem; font-weight: 300; color: var(--text-dark); }
+  .preview-stat-label { font-size: 13px; color: var(--text-soft); font-weight: 300; }
+
+  /* ===== PRICING ===== */
+  #pricing-screen {
+    min-height: 100vh;
+    padding: 4rem 2rem;
+  }
+
+  .pricing-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-soft);
+    cursor: pointer;
+    margin-bottom: 3rem;
+    transition: color 0.2s;
+    font-weight: 400;
+    width: fit-content;
+  }
+
+  .pricing-back:hover { color: var(--text-dark); }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 960px;
+    margin: 0 auto 3rem;
+  }
+
+  .pricing-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    border: 1.5px solid rgba(196,181,240,0.3);
+    box-shadow: var(--shadow-card);
+    position: relative;
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+
+  .pricing-card:hover { transform: translateY(-3px); }
+
+  .pricing-card.featured {
+    border-color: var(--lavender-deep);
+    box-shadow: 0 8px 36px rgba(155,135,224,0.22);
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--lavender-deep), var(--dusty-rose));
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 18px;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .pricing-plan-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .pricing-plan-desc {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .pricing-amount {
+    margin-bottom: 1.5rem;
+  }
+
+  .pricing-amount .price {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--text-dark);
+    line-height: 1;
+  }
+
+  .pricing-amount .period {
+    font-size: 13px;
+    color: var(--text-soft);
+    font-weight: 300;
+  }
+
+  .pricing-features {
+    list-style: none;
+    margin-bottom: 1.8rem;
+  }
+
+  .pricing-features li {
+    font-size: 13.5px;
+    color: var(--text-mid);
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 300;
+  }
+
+  .pricing-features li::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--lavender);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%239b87e0' d='M3 8l3.5 3.5L13 4.5'/%3E%3C/svg%3E");
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .code-section {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 2rem;
+    border: 1px solid rgba(196,181,240,0.3);
+    max-width: 460px;
+    margin: 0 auto 2rem;
+    box-shadow: var(--shadow-card);
+  }
+
+  .code-section h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .code-section p {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+
+  .code-input-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .code-input {
+    flex: 1;
+    padding: 11px 16px;
+    border: 1.5px solid var(--lavender-mid);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 15px;
+    background: var(--warm-white);
+    color: var(--text-dark);
+    letter-spacing: 0.08em;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .code-input:focus { border-color: var(--lavender-deep); }
+
+  .code-error {
+    font-size: 12.5px;
+    color: var(--dusty-rose);
+    margin-top: 6px;
+    display: none;
+  }
+
+  .code-error.visible { display: block; }
+
+  /* ===== CHECKOUT MODAL ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(45,31,53,0.4);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    backdrop-filter: blur(8px);
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal-box {
+    background: var(--warm-white);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: 0 24px 64px rgba(45,31,53,0.25);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-soft);
+    font-size: 20px;
+    line-height: 1;
+    padding: 4px;
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover { color: var(--text-dark); }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .modal-subtitle {
+    font-size: 14px;
+    color: var(--text-soft);
+    margin-bottom: 1.8rem;
+    font-weight: 300;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-mid);
+    margin-bottom: 5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid rgba(196,181,240,0.5);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 14px;
+    background: white;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus { border-color: var(--lavender-deep); }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .checkout-summary {
+    background: var(--lavender);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .checkout-summary .plan-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    font-weight: 400;
+  }
+
+  .checkout-summary .plan-price {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--lavender-deep);
+    font-weight: 400;
+  }
+
+  .secure-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-soft);
+    justify-content: center;
+    margin-top: 0.8rem;
+  }
+
+  /* ===== MAIN APP ===== */
+  #app-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* TOP NAV */
+  .app-topnav {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(196,181,240,0.25);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .app-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  .app-logo .heart-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--dusty-rose);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* BOTTOM NAV */
+  .app-bottomnav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(196,181,240,0.25);
+    display: flex;
+    z-index: 100;
+    padding: 0 0 env(safe-area-inset-bottom);
+  }
+
+  .nav-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    background: none;
+    min-height: 60px;
+    color: var(--text-light);
+    font-family: var(--font-body);
+  }
+
+  .nav-tab.active { color: var(--lavender-deep); }
+
+  .nav-tab .nav-icon {
+    font-size: 18px;
+    margin-bottom: 3px;
+    display: block;
+    line-height: 1;
+  }
+
+  .nav-tab .nav-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .nav-tab.active .nav-label { color: var(--lavender-deep); }
+
+  /* APP CONTENT */
+  .app-content {
+    flex: 1;
+    padding: 1.5rem 1.5rem 80px;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* TAB PANELS */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    border: 1px solid rgba(196,181,240,0.28);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 1rem;
+    backdrop-filter: blur(12px);
+  }
+
+  .card-sm {
+    background: var(--card-bg);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.2rem;
+    border: 1px solid rgba(196,181,240,0.28);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 0.75rem;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .card-subtitle {
+    font-size: 13px;
+    color: var(--text-soft);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* ===== HOME DASHBOARD ===== */
+  .welcome-banner {
+    background: linear-gradient(135deg, var(--lavender), var(--blush));
+    border-radius: var(--radius-lg);
+    padding: 1.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .welcome-banner::after {
+    content: '♡';
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 64px;
+    opacity: 0.12;
+    color: var(--dusty-rose);
+  }
+
+  .welcome-greeting {
+    font-size: 13px;
+    color: var(--text-soft);
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+  }
+
+  .welcome-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 0.6rem;
+  }
+
+  .welcome-message {
+    font-size: 14px;
+    color: var(--text-mid);
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 380px;
+  }
+
+  .pulse-meter {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    padding: 1.3rem 1.5rem;
+    border: 1px solid rgba(196,181,240,0.28);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 1rem;
+  }
+
+  .pulse-label {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .pulse-bars {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    height: 60px;
+    margin-bottom: 0.8rem;
+  }
+
+  .pulse-bar-wrap {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .pulse-bar-fill {
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .pulse-bar-name {
+    font-size: 9px;
+    color: var(--text-light);
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .pulse-summary {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .pill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .pill-tag.strength { background: rgba(155,135,224,0.12); color: var(--lavender-deep); }
+  .pill-tag.attention { background: rgba(212,132,158,0.15); color: var(--dusty-rose); }
+  .pill-tag.growing { background: rgba(201,169,110,0.15); color: var(--gold); }
+  .pill-tag.stable { background: rgba(196,181,240,0.2); color: var(--text-mid); }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+
+  .stat-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    border: 1px solid rgba(196,181,240,0.22);
+    box-shadow: var(--shadow-card);
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text-dark);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label-sm {
+    font-size: 12px;
+    color: var(--text-soft);
+    font-weight: 400;
+  }
+
+  .checkin-rec {
+    background: linear-gradient(135deg, rgba(155,135,224,0.08), rgba(212,132,158,0.06));
+    border: 1.5px solid var(--lavender-mid);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .checkin-type-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--lavender-deep);
+    color: white;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.8rem;
+  }
+
+  .checkin-rec-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .checkin-rec-desc {
+    font-size: 13.5px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+  }
+
+  .checkin-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.2rem;
+  }
+
+  .meta-chip {
+    background: white;
+    border: 1px solid rgba(196,181,240,0.4);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--text-mid);
+    font-weight: 400;
+  }
+
+  .activity-rec {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    padding: 1.2rem 1.5rem;
+    border: 1px solid rgba(201,169,110,0.25);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .activity-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--gold-light);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .activity-rec-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+  }
+
+  .activity-rec-desc {
+    font-size: 13px;
+    color: var(--text-soft);
+    font-weight: 300;
+  }
+
+  /* ===== RELATIONSHIP MAP ===== */
+  .map-container {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    border: 1px solid rgba(196,181,240,0.28);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 1rem;
+  }
+
+  .map-svg-wrap {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 360px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--text-mid);
+    font-weight: 400;
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .map-categories {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .cat-row {
+    background: var(--warm-white);
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 0.9rem;
+    border: 1px solid rgba(196,181,240,0.2);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .cat-row:hover { border-color: var(--lavender-deep); background: var(--lavender); }
+
+  .cat-row-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-mid);
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  .cat-bar {
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(196,181,240,0.25);
+    overflow: hidden;
+  }
+
+  .cat-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+
+  .cat-bar-fill.thriving { background: linear-gradient(90deg, var(--lavender-deep), #b8a8f8); }
+  .cat-bar-fill.stable { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  .cat-bar-fill.attention { background: linear-gradient(90deg, var(--rose), var(--blush-mid)); }
+  .cat-bar-fill.tense { background: linear-gradient(90deg, var(--dusty-rose), var(--rose)); }
+
+  .cat-status {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .cat-status.thriving { color: var(--lavender-deep); }
+  .cat-status.stable { color: var(--gold); }
+  .cat-status.attention { color: var(--rose); }
+  .cat-status.tense { color: var(--dusty-rose); }
+
+  /* ===== INTAKE QUESTIONNAIRE ===== */
+  .intake-progress {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(196,181,240,0.25);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .progress-bar-outer {
+    flex: 1;
+    height: 6px;
+    background: var(--lavender);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-bar-inner {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--lavender-deep), var(--dusty-rose));
+    transition: width 0.4s ease;
+  }
+
+  .progress-text {
+    font-size: 12px;
+    color: var(--text-soft);
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 50px;
+    text-align: right;
+  }
+
+  .question-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    border: 1px solid rgba(196,181,240,0.28);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.35s ease;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .question-section-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--lavender-deep);
+    background: var(--lavender);
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-bottom: 0.8rem;
+  }
+
+  .question-text {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 0.4rem;
+    line-height: 1.35;
+  }
+
+  .question-hint {
+    font-size: 13px;
+    color: var(--text-soft);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .options-grid {
+    display: grid;
+    gap: 8px;
+  }
+
+  .option-btn {
+    background: var(--warm-white);
+    border: 1.5px solid rgba(196,181,240,0.35);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--text-mid);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.4;
+  }
+
+  .option-btn:hover {
+    border-color: var(--lavender-deep);
+    background: var(--lavender);
+    color: var(--text-dark);
+  }
+
+  .option-btn.selected {
+    border-color: var(--lavender-deep);
+    background: var(--lavender);
+    color: var(--text-dark);
+    font-weight: 400;
+  }
+
+  .option-btn.selected::after {
+    content: '✓';
+    margin-left: auto;
+    color: var(--lavender-deep);
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .option-emoji { font-size: 18px; flex-shrink: 0; }
+
+  .scale-row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .scale-btn {
+    flex: 1;
+    aspect-ratio: 1;
+    max-width: 44px;
+    border: 1.5px solid rgba(196,181,240,0.35);
+    border-radius: var(--radius-sm);
+    background: var(--warm-white);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-soft);
+    transition: all 0.2s;
+    font-family: var(--font-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scale-btn:hover, .scale-btn.selected {
+    border-color: var(--lavender-deep);
+    background: var(--lavender);
+    color: var(--lavender-deep);
+  }
+
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-light);
+    font-weight: 400;
+    padding: 0 2px;
+  }
+
+  .intake-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 0.5rem;
+  }
+
+  /* ===== CHECK-IN BUILDER ===== */
+  .checkin-output {
+    background: linear-gradient(160deg, var(--lavender), var(--blush));
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .checkin-output::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+  }
+
+  .checkin-output-type {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--dusty-rose);
+    margin-bottom: 0.5rem;
+  }
+
+  .checkin-output-title {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+
+  .checkin-output-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-badge {
+    background: rgba(255,255,255,0.75);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12.5px;
+    color: var(--text-mid);
+    font-weight: 400;
+    backdrop-filter: blur(4px);
+  }
+
+  .questions-list { list-style: none; }
+
+  .question-item {
+    background: var(--card-bg);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.2rem;
+    border: 1px solid rgba(196,181,240,0.25);
+    margin-bottom: 8px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .q-num {
+    width: 24px;
+    height: 24px;
+    background: var(--lavender);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--lavender-deep);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .q-text {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    line-height: 1.4;
+  }
+
+  /* ===== CONVERSATION GUIDE ===== */
+  .guide-section {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid rgba(196,181,240,0.28);
+    margin-bottom: 0.8rem;
+    box-shadow: var(--shadow-card);
+  }
+
+  .guide-section-header {
+    padding: 1rem 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .guide-section-header:hover { background: var(--lavender); }
+
+  .guide-section-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .guide-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .guide-icon.open-icon { background: var(--lavender); }
+  .guide-icon.warm-icon { background: var(--blush); }
+  .guide-icon.deep-icon { background: rgba(155,135,224,0.15); }
+  .guide-icon.close-icon { background: var(--gold-light); }
+
+  .guide-chevron {
+    width: 20px;
+    height: 20px;
+    color: var(--text-light);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+
+  .guide-section.open .guide-chevron { transform: rotate(180deg); }
+
+  .guide-section-body {
+    display: none;
+    padding: 0 1.3rem 1.2rem;
+    border-top: 1px solid rgba(196,181,240,0.2);
+  }
+
+  .guide-section.open .guide-section-body { display: block; }
+
+  .guide-prompt {
+    background: var(--warm-white);
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1rem;
+    border-left: 3px solid var(--lavender-deep);
+    margin-top: 10px;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-mid);
+    line-height: 1.55;
+    font-weight: 400;
+  }
+
+  /* ===== ACTIVITIES TAB ===== */
+  .activity-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    border: 1px solid rgba(196,181,240,0.25);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 0.8rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .activity-card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .activity-card-icon.light { background: var(--lavender); }
+  .activity-card-icon.warm { background: var(--blush); }
+  .activity-card-icon.cozy { background: var(--gold-light); }
+  .activity-card-icon.calm { background: rgba(155,135,224,0.12); }
+
+  .activity-card-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .activity-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 0.5rem;
+  }
+
+  .activity-tag {
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+
+  .activity-tag.when { background: var(--lavender); color: var(--lavender-deep); }
+  .activity-tag.time { background: var(--gold-light); color: #7a5c1e; }
+  .activity-tag.mood { background: var(--blush); color: var(--dusty-rose); }
+
+  .activity-card-desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ===== HISTORY ===== */
+  .trend-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(196,181,240,0.18);
+  }
+
+  .trend-row:last-child { border-bottom: none; }
+
+  .trend-label {
+    font-size: 13px;
+    color: var(--text-mid);
+    font-weight: 400;
+    width: 120px;
+    flex-shrink: 0;
+  }
+
+  .trend-bar-outer {
+    flex: 1;
+    height: 8px;
+    background: rgba(196,181,240,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .trend-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--lavender-deep), var(--dusty-rose));
+  }
+
+  .trend-val {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-soft);
+    min-width: 28px;
+    text-align: right;
+  }
+
+  /* ===== SETTINGS ===== */
+  .settings-section-title {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--text-soft);
+    padding: 1rem 0 0.5rem;
+  }
+
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(196,181,240,0.18);
+  }
+
+  .toggle-row-title {
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 400;
+  }
+
+  .toggle-row-sub {
+    font-size: 12px;
+    color: var(--text-soft);
+    font-weight: 300;
+    margin-top: 2px;
+  }
+
+  .toggle {
+    width: 44px;
+    height: 26px;
+    background: var(--lavender-mid);
+    border-radius: 13px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.25s;
+    flex-shrink: 0;
+    border: none;
+  }
+
+  .toggle.on { background: var(--lavender-deep); }
+
+  .toggle::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    top: 3px;
+    left: 3px;
+    transition: left 0.25s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+
+  .toggle.on::after { left: 21px; }
+
+  /* ===== SAFETY NOTE ===== */
+  .safety-note {
+    background: rgba(212,132,158,0.08);
+    border: 1px solid rgba(212,132,158,0.25);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.2rem;
+    margin-top: 0.8rem;
+  }
+
+  .safety-note p {
+    font-size: 12.5px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .safety-note p strong {
+    color: var(--dusty-rose);
+    font-weight: 500;
+  }
+
+  /* ===== MISC ===== */
+  .section-spacer { height: 0.5rem; }
+
+  .inline-link {
+    color: var(--lavender-deep);
+    text-decoration: none;
+    font-weight: 400;
+    border-bottom: 1px solid var(--lavender-mid);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .inline-link:hover { color: var(--dusty-rose); border-color: var(--dusty-rose); }
+
+  .microcopy {
+    font-size: 13px;
+    color: var(--text-soft);
+    font-style: italic;
+    font-weight: 300;
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+
+  .tab-header {
+    margin-bottom: 1.2rem;
+  }
+
+  .tab-header-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+  }
+
+  .tab-header-sub {
+    font-size: 14px;
+    color: var(--text-soft);
+    font-weight: 300;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    .app-content { padding: 1rem 1rem 80px; }
+    .hero-title { font-size: 3rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .map-categories { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .modal-box { padding: 1.8rem 1.5rem; }
+  }
+
+  @media (min-width: 800px) {
+    .app-bottomnav { display: none; }
+    .app-topnav-tabs {
+      display: flex;
+      gap: 4px;
+    }
+    .app-content { padding: 2rem 2rem 2rem; }
+  }
+
+  .app-topnav-tabs {
+    display: none;
+    gap: 4px;
+  }
+
+  .topnav-tab {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-soft);
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    background: none;
+    font-family: var(--font-body);
+  }
+
+  .topnav-tab:hover { background: var(--lavender); color: var(--text-dark); }
+  .topnav-tab.active { background: var(--lavender); color: var(--lavender-deep); font-weight: 500; }
+
+  .topnav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .avatar-chip {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--lavender-deep), var(--dusty-rose));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+  }
+
+  .app-topnav-tabs { display: flex; }
+</style>
+</head>
+<body>
+
+<!-- ===== LANDING SCREEN ===== -->
+<div id="landing" class="screen active">
+
+  <!-- Hero -->
+  <section class="landing-hero">
+    <div class="logo-mark">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 28C18 28 6 21 6 13.5C6 10.46 8.46 8 11.5 8C13.74 8 15.68 9.34 16.66 11.26L18 13.5L19.34 11.26C20.32 9.34 22.26 8 24.5 8C27.54 8 30 10.46 30 13.5C30 21 18 28 18 28Z" fill="white" opacity="0.9"/>
+      </svg>
+    </div>
+
+    <p class="hero-eyebrow">A relationship wellness experience</p>
+
+    <h1 class="hero-title">
+      Heart<em>Map</em>
+    </h1>
+
+    <p class="hero-subtitle">
+      Turn relationship tension into clarity. A gentle, guided space to understand your patterns, 
+      build intentional check-ins, and nurture what matters most between you.
+    </p>
+
+    <div class="hero-cta-group">
+      <button class="btn-primary" onclick="showScreen('pricing-screen')">Unlock Full Experience</button>
+      <button class="btn-secondary" onclick="showScreen('pricing-screen')">View Plans</button>
+    </div>
+
+    <div class="hero-trust-badges">
+      <span class="trust-badge"><span class="dot"></span> Emotionally intelligent</span>
+      <span class="trust-badge"><span class="dot"></span> Research-informed</span>
+      <span class="trust-badge"><span class="dot"></span> Private & secure</span>
+      <span class="trust-badge"><span class="dot"></span> No therapy jargon</span>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="landing-features">
+    <p class="section-label">What you get</p>
+    <h2 class="section-title">Everything your relationship <em>deserves</em></h2>
+    <p class="section-subtitle">Not a quiz. Not a worksheet. A living, adaptive guide that grows with you.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon purple">🗺️</div>
+        <div class="feature-title">Relationship Map</div>
+        <p class="feature-desc">An interactive visual of your relationship's emotional landscape — where you're thriving, what needs attention, and what's been quietly avoided.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon pink">✨</div>
+        <div class="feature-title">Personalized Check-In Builder</div>
+        <p class="feature-desc">Based on your current season — whether it's smooth, stormy, or somewhere in between — the app builds you a custom conversation guide.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon gold">🌿</div>
+        <div class="feature-title">Activity Pairings</div>
+        <p class="feature-desc">The right conversation is easier after the right moment. We suggest activities that soften tension and open connection before you begin.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon rose">📈</div>
+        <div class="feature-title">Pattern Tracking</div>
+        <p class="feature-desc">See how your relationship evolves over time. Spot what keeps surfacing, what's improving, and what you've healed together.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blurred Preview -->
+  <section class="preview-section">
+    <p class="section-label">Sneak peek</p>
+    <h2 class="section-title">A glimpse of <em>your</em> dashboard</h2>
+    <p class="section-subtitle">Unlock the full experience to see your complete relationship map and personalized check-in.</p>
+
+    <div class="preview-cards">
+      <div class="preview-card">
+        <div class="preview-card-label">Relationship Pulse</div>
+        <div class="mini-pulse">
+          <div class="mini-bar lavender" style="height:75%"></div>
+          <div class="mini-bar rose" style="height:55%"></div>
+          <div class="mini-bar lavender" style="height:80%"></div>
+          <div class="mini-bar gold" style="height:60%"></div>
+          <div class="mini-bar lavender" style="height:70%"></div>
+          <div class="mini-bar rose" style="height:45%"></div>
+          <div class="mini-bar lavender" style="height:85%"></div>
+        </div>
+        <div class="preview-stat">72</div>
+        <div class="preview-stat-label">Connection score this week</div>
+      </div>
+
+      <div class="preview-card locked">
+        <div class="preview-card-label">This Week's Check-In</div>
+        <div style="font-family:var(--font-display);font-size:1.2rem;color:var(--text-dark);margin-bottom:6px;">Connection Boost</div>
+        <div style="font-size:13px;color:var(--text-soft);margin-bottom:10px;font-weight:300;">25 min · Weekly · Light-Moderate</div>
+        <div style="font-size:13px;color:var(--text-mid);font-weight:300;line-height:1.5;">Start with an evening walk, then move into 4 gentle prompts about…</div>
+        <div class="lock-badge">🔒 Unlock to see</div>
+      </div>
+
+      <div class="preview-card locked">
+        <div class="preview-card-label">Main Themes</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;">
+          <span class="pill-tag strength">Quality Time</span>
+          <span class="pill-tag attention">Communication</span>
+          <span class="pill-tag growing">Future Goals</span>
+        </div>
+        <div style="font-size:13px;color:var(--text-soft);font-weight:300;line-height:1.5;">3 areas surfacing this week. Personalized questions for each…</div>
+        <div class="lock-badge">🔒 Unlock to see</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing teaser -->
+  <section style="padding:3rem 2rem 5rem;text-align:center;">
+    <h2 class="section-title" style="margin-bottom:0.8rem;">Invest in <em>you, together</em></h2>
+    <p style="font-size:16px;color:var(--text-mid);max-width:400px;margin:0 auto 2rem;font-weight:300;line-height:1.65;">
+      One relationship. One space. Built with care, designed for intimacy, and worth every moment.
+    </p>
+    <button class="btn-primary" onclick="showScreen('pricing-screen')" style="font-size:16px;padding:16px 40px;">
+      Get Started — See Plans
+    </button>
+    <p style="margin-top:1rem;font-size:13px;color:var(--text-light);">Have an access code? <span class="inline-link" onclick="showScreen('pricing-screen')">Enter it here</span></p>
+  </section>
+
+  <!-- Safety note -->
+  <div style="max-width:600px;margin:0 auto;padding:0 2rem 3rem;">
+    <div class="safety-note">
+      <p><strong>A gentle note:</strong> HeartMap is a relationship reflection and communication support tool. It is not a replacement for therapy, counseling, or crisis support. If you or your partner feel unsafe in any way, please reach out to a trusted professional or call a crisis line.</p>
+    </div>
+  </div>
+
+</div><!-- end landing -->
+
+<!-- ===== PRICING SCREEN ===== -->
+<div id="pricing-screen" class="screen">
+  <div style="max-width:900px;margin:0 auto;padding:2rem;">
+
+    <div class="pricing-back" onclick="showScreen('landing')">
+      ← Back
+    </div>
+
+    <p class="section-label" style="text-align:left;">Choose your path</p>
+    <h2 class="section-title" style="text-align:left;margin-bottom:0.5rem;">Begin your <em>HeartMap</em> journey</h2>
+    <p style="font-size:15px;color:var(--text-mid);font-weight:300;margin-bottom:2.5rem;">
+      Premium-feeling, intentionally designed, worth every penny.
+    </p>
+
+    <div class="pricing-grid">
+
+      <div class="pricing-card" onclick="openCheckout('monthly')">
+        <div class="pricing-plan-name">Monthly</div>
+        <p class="pricing-plan-desc">Flexible access. Great for couples exploring the app together or through seasonal needs.</p>
+        <div class="pricing-amount">
+          <span class="price">$14</span>
+          <span class="period">/month</span>
+        </div>
+        <ul class="pricing-features">
+          <li>Full relationship intake</li>
+          <li>Interactive relationship map</li>
+          <li>Personalized check-in builder</li>
+          <li>Guided conversation mode</li>
+          <li>Activity pairing suggestions</li>
+          <li>Progress history & trends</li>
+        </ul>
+        <button class="btn-secondary" style="width:100%">Get Monthly Access</button>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="popular-badge">✦ Most Loved</div>
+        <div class="pricing-plan-name">Annual</div>
+        <p class="pricing-plan-desc">Best value. A full year of intentional check-ins, growth tracking, and relationship care.</p>
+        <div class="pricing-amount">
+          <span class="price">$99</span>
+          <span class="period">/year · save 41%</span>
+        </div>
+        <ul class="pricing-features">
+          <li>Everything in Monthly</li>
+          <li>Both partners' view</li>
+          <li>Downloadable summaries</li>
+          <li>Premium customization</li>
+          <li>Seasonal relationship resets</li>
+          <li>Priority support</li>
+        </ul>
+        <button class="btn-primary" style="width:100%" onclick="event.stopPropagation();openCheckout('annual')">Get Annual Access</button>
+      </div>
+
+      <div class="pricing-card" onclick="openCheckout('couple')">
+        <div class="pricing-plan-name">Couples Plan</div>
+        <p class="pricing-plan-desc">One shared plan, both partners fully synced. Includes comparison views and partner invites.</p>
+        <div class="pricing-amount">
+          <span class="price">$149</span>
+          <span class="period">/year for 2</span>
+        </div>
+        <ul class="pricing-features">
+          <li>Everything in Annual</li>
+          <li>Partner sync & invite</li>
+          <li>Side-by-side reflection views</li>
+          <li>Shared relationship history</li>
+          <li>Joint check-in mode</li>
+          <li>Therapist export summaries</li>
+        </ul>
+        <button class="btn-secondary" style="width:100%">Get Couples Access</button>
+      </div>
+
+    </div>
+
+    <!-- Access Code -->
+    <div class="code-section">
+      <h3>Have an access code?</h3>
+      <p>Enter your invite code, promo code, or gift access below.</p>
+      <div class="code-input-row">
+        <input type="text" class="code-input" id="access-code-input" placeholder="XXXX-XXXX" maxlength="12" oninput="this.value=this.value.toUpperCase()" />
+        <button class="btn-primary" style="padding:11px 20px;font-size:14px;" onclick="validateCode()">Redeem</button>
+      </div>
+      <div class="code-error" id="code-error">That code doesn't look right. Please try again or check your email.</div>
+    </div>
+
+    <p style="text-align:center;font-size:13px;color:var(--text-light);">
+      Already purchased? <span class="inline-link" onclick="enterApp()">Log in here</span>
+    </p>
+
+  </div>
+</div>
+
+<!-- ===== CHECKOUT MODAL ===== -->
+<div class="modal-overlay" id="checkout-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeCheckout()">✕</button>
+
+    <div class="checkout-summary" id="checkout-summary">
+      <span class="plan-name">Annual Plan</span>
+      <span class="plan-price">$99</span>
+    </div>
+
+    <h2 class="modal-title">Complete Your Order</h2>
+    <p class="modal-subtitle">You're moments away from a more intentional relationship.</p>
+
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input type="email" class="form-input" placeholder="you@email.com" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <input type="text" class="form-input" placeholder="Your name" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Card Number</label>
+      <input type="text" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19" />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Expiry</label>
+        <input type="text" class="form-input" placeholder="MM / YY" maxlength="7" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">CVV</label>
+        <input type="text" class="form-input" placeholder="•••" maxlength="4" />
+      </div>
+    </div>
+
+    <button class="btn-primary" style="width:100%;font-size:16px;padding:15px;" onclick="completePayment()">
+      Complete Purchase & Unlock Access
+    </button>
+
+    <div class="secure-note">
+      <span>🔒</span>
+      <span>Secured with 256-bit encryption · Cancel anytime</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN APP SCREEN ===== -->
+<div id="app-screen" class="screen">
+
+  <!-- Top Nav -->
+  <nav class="app-topnav">
+    <div class="app-logo" onclick="switchTab('home')">
+      HeartMap <span class="heart-dot"></span>
+    </div>
+
+    <div class="app-topnav-tabs" id="desktop-tabs">
+      <button class="topnav-tab active" onclick="switchTab('home')" data-tab="home">Home</button>
+      <button class="topnav-tab" onclick="switchTab('map')" data-tab="map">Map</button>
+      <button class="topnav-tab" onclick="switchTab('intake')" data-tab="intake">Reflect</button>
+      <button class="topnav-tab" onclick="switchTab('builder')" data-tab="builder">Check-In</button>
+      <button class="topnav-tab" onclick="switchTab('guide')" data-tab="guide">Guide</button>
+      <button class="topnav-tab" onclick="switchTab('activities')" data-tab="activities">Activities</button>
+      <button class="topnav-tab" onclick="switchTab('history')" data-tab="history">History</button>
+      <button class="topnav-tab" onclick="switchTab('settings')" data-tab="settings">Settings</button>
+    </div>
+
+    <div class="topnav-actions">
+      <div class="avatar-chip">A</div>
+    </div>
+  </nav>
+
+  <!-- App Content -->
+  <div class="app-content">
+
+    <!-- ========== HOME TAB ========== -->
+    <div id="tab-home" class="tab-panel active">
+
+      <div class="welcome-banner">
+        <p class="welcome-greeting">Good evening, Alex</p>
+        <h2 class="welcome-title">Your relationship is a living thing.</h2>
+        <p class="welcome-message">You've been together 3 years. This week, we're noticing some themes around connection and communication worth gently exploring.</p>
+      </div>
+
+      <!-- Pulse Meter -->
+      <div class="pulse-meter">
+        <div class="pulse-label">Relationship Pulse — This Week</div>
+        <div class="pulse-bars" id="pulse-bars">
+          <!-- filled by JS -->
+        </div>
+        <div class="pulse-summary" id="pulse-summary">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <span class="stat-num">72</span>
+          <span class="stat-label-sm">Connection Score</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">3</span>
+          <span class="stat-label-sm">Focus Areas</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">2</span>
+          <span class="stat-label-sm">Check-ins done</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" style="font-size:1.4rem;">Fri</span>
+          <span class="stat-label-sm">Next check-in</span>
+        </div>
+      </div>
+
+      <!-- Check-In Recommendation -->
+      <div class="checkin-rec">
+        <div class="checkin-type-badge">✦ This Week's Recommendation</div>
+        <h3 class="checkin-rec-title">Connection Boost Check-In</h3>
+        <p class="checkin-rec-desc">You've been navigating a mildly busy season. A light-to-moderate check-in will help you stay tuned in without adding pressure. Focus on appreciation, what's working, and one gentle exploration of communication.</p>
+        <div class="checkin-meta">
+          <span class="meta-chip">⏱ 25–35 minutes</span>
+          <span class="meta-chip">📅 Weekly</span>
+          <span class="meta-chip">🌙 Light-Moderate</span>
+          <span class="meta-chip">🌿 Cozy setting</span>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn-primary" onclick="switchTab('guide')">Start Conversation</button>
+          <button class="btn-secondary" onclick="switchTab('builder')">View Full Plan</button>
+        </div>
+      </div>
+
+      <!-- Activity Pairing -->
+      <div class="activity-rec">
+        <div class="activity-icon">🍵</div>
+        <div>
+          <div class="activity-rec-title">Tea & Soft Light Check-In</div>
+          <p class="activity-rec-desc">Make two mugs, light a candle, settle in together. The warmth and ritual create a gentle container for conversation.</p>
+        </div>
+      </div>
+
+      <p class="microcopy">"A little structure can make hard conversations softer."</p>
+
+      <div class="card">
+        <div class="card-title">Strengths to Protect</div>
+        <p class="card-subtitle" style="margin-bottom:0.8rem;">These areas are carrying your relationship right now. Acknowledge them.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="pill-tag strength">Emotional Safety</span>
+          <span class="pill-tag strength">Shared Humor</span>
+          <span class="pill-tag strength">Trust</span>
+          <span class="pill-tag growing">Future Vision</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Soft Places to Start</div>
+        <p class="card-subtitle">Try opening your next check-in with one of these gentle openers:</p>
+        <div style="margin-top:0.8rem;">
+          <div class="guide-prompt">"What's one moment from this week you want me to know about?"</div>
+          <div class="guide-prompt">"What have you needed more of lately that you haven't said out loud?"</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========== MAP TAB ========== -->
+    <div id="tab-map" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Your Relationship Map</h2>
+        <p class="tab-header-sub">A living view of your emotional landscape. Tap any area to explore.</p>
+      </div>
+
+      <div class="map-container">
+        <div class="map-svg-wrap">
+          <svg id="radar-chart" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+        <div class="map-legend">
+          <span class="legend-item"><span class="legend-dot" style="background:var(--lavender-deep)"></span>Thriving</span>
+          <span class="legend-item"><span class="legend-dot" style="background:var(--gold)"></span>Stable</span>
+          <span class="legend-item"><span class="legend-dot" style="background:var(--rose)"></span>Needs Attention</span>
+          <span class="legend-item"><span class="legend-dot" style="background:var(--dusty-rose)"></span>Tense</span>
+        </div>
+      </div>
+
+      <div class="map-categories" id="map-categories">
+        <!-- filled by JS -->
+      </div>
+
+      <p class="microcopy" style="margin-top:1rem;">"Your relationship has patterns. Let's make them easier to understand."</p>
+
+    </div>
+
+    <!-- ========== INTAKE TAB ========== -->
+    <div id="tab-intake" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Reflection Questions</h2>
+        <p class="tab-header-sub">Let's gently map what's been happening lately.</p>
+      </div>
+
+      <div class="intake-progress">
+        <div class="progress-bar-outer">
+          <div class="progress-bar-inner" id="intake-progress-bar" style="width:15%"></div>
+        </div>
+        <div class="progress-text" id="intake-progress-text">2 of 12</div>
+      </div>
+
+      <div id="intake-questions">
+        <!-- filled by JS -->
+      </div>
+
+      <div class="intake-nav" id="intake-nav">
+        <button class="btn-secondary" id="intake-prev-btn" onclick="intakePrev()" style="display:none">← Back</button>
+        <button class="btn-primary" id="intake-next-btn" onclick="intakeNext()">Continue →</button>
+      </div>
+
+    </div>
+
+    <!-- ========== BUILDER TAB ========== -->
+    <div id="tab-builder" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Your Check-In Plan</h2>
+        <p class="tab-header-sub">Built around where you are right now.</p>
+      </div>
+
+      <div class="checkin-output">
+        <div class="checkin-output-type">This Week · Connection Boost</div>
+        <h2 class="checkin-output-title">A Gentle, Focused Check-In</h2>
+        <div class="checkin-output-meta">
+          <span class="meta-badge">⏱ 25–35 min</span>
+          <span class="meta-badge">📅 Weekly</span>
+          <span class="meta-badge">🌿 Light-Moderate</span>
+          <span class="meta-badge">🕯️ Cozy atmosphere</span>
+        </div>
+        <button class="btn-primary" onclick="switchTab('guide')">Open Conversation Guide →</button>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:1rem;">Conversation Themes</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem;">
+          <span class="pill-tag strength">Appreciation</span>
+          <span class="pill-tag attention">Communication</span>
+          <span class="pill-tag growing">Quality Time</span>
+        </div>
+        <p class="card-subtitle">This week, your check-in will move through appreciation first — then gently explore one area of communication tension, and close with a shared vision moment.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:0.8rem;">Your Questions This Week</div>
+        <ul class="questions-list" id="builder-questions">
+          <!-- filled by JS -->
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:0.6rem;">Emotional Pacing Notes</div>
+        <p class="card-subtitle">One partner leans slightly anxious-attached; the other tends to need space first. Open with warmth, allow pauses, and avoid stacking questions. If things get heavy, name it and take a 2-minute breather.</p>
+      </div>
+
+      <div class="card" style="border-color:rgba(201,169,110,0.3);">
+        <div class="card-title" style="margin-bottom:0.6rem;">Closing Ritual Suggestion</div>
+        <p class="card-subtitle">End with three genuine appreciations — one from each of you, plus one thing you're looking forward to together. Keep it simple, but feel it.</p>
+      </div>
+
+    </div>
+
+    <!-- ========== GUIDE TAB ========== -->
+    <div id="tab-guide" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Conversation Guide</h2>
+        <p class="tab-header-sub">Open these together. Move at your own pace.</p>
+      </div>
+
+      <div class="checkin-rec" style="margin-bottom:1rem;">
+        <p style="font-size:13px;color:var(--text-mid);font-weight:300;line-height:1.6;">
+          <em>You don't need to be in crisis to check in. This conversation is an act of care — for both of you.</em>
+        </p>
+      </div>
+
+      <!-- Opening -->
+      <div class="guide-section open">
+        <div class="guide-section-header" onclick="toggleGuideSection(this)">
+          <div class="guide-section-title">
+            <div class="guide-icon open-icon">🌿</div>
+            Opening & Grounding
+          </div>
+          <svg class="guide-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="guide-section-body">
+          <p style="font-size:13.5px;color:var(--text-soft);font-weight:300;line-height:1.6;padding-top:0.8rem;">Before you begin, take a breath together. You're not here to solve everything — just to be here.</p>
+          <div class="guide-prompt">"Before we start, how are you actually feeling right now — body, mind, all of it?"</div>
+          <div class="guide-prompt">"Is there anything you want to say you need from this conversation before we begin?"</div>
+        </div>
+      </div>
+
+      <!-- Appreciation -->
+      <div class="guide-section">
+        <div class="guide-section-header" onclick="toggleGuideSection(this)">
+          <div class="guide-section-title">
+            <div class="guide-icon warm-icon">🌸</div>
+            Appreciation
+          </div>
+          <svg class="guide-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="guide-section-body">
+          <div class="guide-prompt">"What's something you did this week that I want you to know I noticed?"</div>
+          <div class="guide-prompt">"When did I feel most like myself around you recently?"</div>
+        </div>
+      </div>
+
+      <!-- Current Themes -->
+      <div class="guide-section">
+        <div class="guide-section-header" onclick="toggleGuideSection(this)">
+          <div class="guide-section-title">
+            <div class="guide-icon deep-icon">💬</div>
+            Current Themes
+          </div>
+          <svg class="guide-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="guide-section-body">
+          <p style="font-size:13px;color:var(--text-soft);font-weight:300;padding-top:0.8rem;margin-bottom:0.2rem;line-height:1.5;font-style:italic;">Based on your reflections, this area is gently surfacing. Go slowly.</p>
+          <div class="guide-prompt">"Have you felt heard by me this week? If not, when did that show up?"</div>
+          <div class="guide-prompt">"Is there something you've been carrying that I don't know about?"</div>
+          <div class="guide-prompt">"What would more connection look like for you right now — practically?"</div>
+        </div>
+      </div>
+
+      <!-- Repair (if needed) -->
+      <div class="guide-section">
+        <div class="guide-section-header" onclick="toggleGuideSection(this)">
+          <div class="guide-section-title">
+            <div class="guide-icon warm-icon">🩹</div>
+            Repair (if needed)
+          </div>
+          <svg class="guide-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="guide-section-body">
+          <div class="guide-prompt">"Is there anything from the last few weeks that felt unfinished between us?"</div>
+          <div class="guide-prompt">"What did you need from me in that moment that I didn't give you?"</div>
+        </div>
+      </div>
+
+      <!-- Forward -->
+      <div class="guide-section">
+        <div class="guide-section-header" onclick="toggleGuideSection(this)">
+          <div class="guide-section-title">
+            <div class="guide-icon deep-icon">🌅</div>
+            Looking Forward
+          </div>
+          <svg class="guide-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="guide-section-body">
+          <div class="guide-prompt">"What's one small thing we could do differently this coming week that would make us both feel better?"</div>
+          <div class="guide-prompt">"What are you looking forward to — together or apart — in the next few weeks?"</div>
+        </div>
+      </div>
+
+      <!-- Close -->
+      <div class="guide-section">
+        <div class="guide-section-header" onclick="toggleGuideSection(this)">
+          <div class="guide-section-title">
+            <div class="guide-icon close-icon">✨</div>
+            Closing Ritual
+          </div>
+          <svg class="guide-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="guide-section-body">
+          <p style="font-size:13px;color:var(--text-soft);font-weight:300;padding-top:0.8rem;line-height:1.5;font-style:italic;">End gently. You did something brave.</p>
+          <div class="guide-prompt">"What do we want to carry forward from this conversation?"</div>
+          <div class="guide-prompt">End with three appreciations — one each. Let them land.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:1rem;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn-primary" onclick="markCheckInDone()">✓ Mark Check-In Complete</button>
+        <button class="btn-secondary">Save Notes</button>
+      </div>
+
+    </div>
+
+    <!-- ========== ACTIVITIES TAB ========== -->
+    <div id="tab-activities" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Activity Pairings</h2>
+        <p class="tab-header-sub">The right moment makes the conversation easier.</p>
+      </div>
+
+      <p class="microcopy" style="text-align:left;padding:0;margin-bottom:1rem;">Based on your current season — light tension, moderate busyness — we suggest cozy, low-pressure pairings.</p>
+
+      <div class="activity-card">
+        <div class="activity-card-icon warm">🍵</div>
+        <div>
+          <div class="activity-card-title">Tea & Soft Light</div>
+          <div class="activity-card-meta">
+            <span class="activity-tag when">Before check-in</span>
+            <span class="activity-tag time">20 min ritual</span>
+            <span class="activity-tag mood">Cozy & intimate</span>
+          </div>
+          <p class="activity-card-desc">Make tea together. Light something. Sit close. Let the warmth and quiet do the first work before you begin talking.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-card-icon light">🚶</div>
+        <div>
+          <div class="activity-card-title">Evening Walk</div>
+          <div class="activity-card-meta">
+            <span class="activity-tag when">During check-in</span>
+            <span class="activity-tag time">30–45 min</span>
+            <span class="activity-tag mood">Calm & open</span>
+          </div>
+          <p class="activity-card-desc">Walking side-by-side reduces face-to-face pressure and naturally opens conversation. Great for moderate topics.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-card-icon cozy">🍳</div>
+        <div>
+          <div class="activity-card-title">Cook Together First</div>
+          <div class="activity-card-meta">
+            <span class="activity-tag when">Before check-in</span>
+            <span class="activity-tag time">45 min</span>
+            <span class="activity-tag mood">Playful & connected</span>
+          </div>
+          <p class="activity-card-desc">Shared tasks lower cortisol. Cooking something simple together primes teamwork before you move into words.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-card-icon calm">🎵</div>
+        <div>
+          <div class="activity-card-title">Playlist + Quiet Drive</div>
+          <div class="activity-card-meta">
+            <span class="activity-tag when">Before or after</span>
+            <span class="activity-tag time">20–40 min</span>
+            <span class="activity-tag mood">Soft & decompressing</span>
+          </div>
+          <p class="activity-card-desc">Share a playlist you've been listening to separately. Let the music hold the space. Talk when you want, not because you have to.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-card-icon warm">🍦</div>
+        <div>
+          <div class="activity-card-title">Dessert Run</div>
+          <div class="activity-card-meta">
+            <span class="activity-tag when">After check-in</span>
+            <span class="activity-tag time">30 min</span>
+            <span class="activity-tag mood">Light & rewarding</span>
+          </div>
+          <p class="activity-card-desc">A playful treat after a meaningful conversation signals: we did something together, and now we get to enjoy each other.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========== HISTORY TAB ========== -->
+    <div id="tab-history" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Patterns Over Time</h2>
+        <p class="tab-header-sub">Notice what keeps surfacing — and what you've healed.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:1rem;">Relationship Trends — Last 8 Weeks</div>
+        <div id="trend-rows"><!-- filled by JS --></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:0.8rem;">Recurring Themes</div>
+        <p class="card-subtitle" style="margin-bottom:0.8rem;">These areas have come up in 3 or more check-ins:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="pill-tag attention">Communication rhythm</span>
+          <span class="pill-tag attention">Quality time</span>
+          <span class="pill-tag stable">Conflict repair</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:0.8rem;">Previous Check-Ins</div>
+        <div id="checkin-history"><!-- filled by JS --></div>
+      </div>
+
+    </div>
+
+    <!-- ========== SETTINGS TAB ========== -->
+    <div id="tab-settings" class="tab-panel">
+
+      <div class="tab-header">
+        <h2 class="tab-header-title">Settings</h2>
+        <p class="tab-header-sub">Make HeartMap feel like yours.</p>
+      </div>
+
+      <div class="card">
+
+        <div class="settings-section-title">Personalization</div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Include Intimacy Questions</div>
+            <div class="toggle-row-sub">Adds physical intimacy prompts to reflections</div>
+          </div>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Include Family Dynamics</div>
+            <div class="toggle-row-sub">Factors in in-law and family stress</div>
+          </div>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Partner Mode</div>
+            <div class="toggle-row-sub">Both partners fill out reflections separately</div>
+          </div>
+          <button class="toggle" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+        <div class="settings-section-title">Check-In Preferences</div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Therapist-Inspired Tone</div>
+            <div class="toggle-row-sub">More structured, clinical-adjacent language</div>
+          </div>
+          <button class="toggle" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Playful Prompts</div>
+            <div class="toggle-row-sub">Add lighthearted and fun options</div>
+          </div>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+        <div class="settings-section-title">Privacy</div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Anonymous Analytics</div>
+            <div class="toggle-row-sub">Help improve HeartMap (no personal data)</div>
+          </div>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-row-title">Require PIN to Open</div>
+            <div class="toggle-row-sub">Extra privacy layer for the app</div>
+          </div>
+          <button class="toggle" onclick="this.classList.toggle('on')"></button>
+        </div>
+
+      </div>
+
+      <div class="safety-note">
+        <p><strong>Safety reminder:</strong> HeartMap is a relationship communication and reflection tool. If you or your partner feel unsafe, coerced, or afraid, please reach out to a trusted professional. You deserve care that goes beyond an app.</p>
+      </div>
+
+      <div style="margin-top:1rem;text-align:center;">
+        <button class="btn-ghost" onclick="showScreen('landing')">← Back to Marketing Site</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Nav (mobile) -->
+  <nav class="app-bottomnav">
+    <button class="nav-tab active" onclick="switchTab('home')" data-tab="home">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('map')" data-tab="map">
+      <span class="nav-icon">◎</span>
+      <span class="nav-label">Map</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('intake')" data-tab="intake">
+      <span class="nav-icon">✎</span>
+      <span class="nav-label">Reflect</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('builder')" data-tab="builder">
+      <span class="nav-icon">❋</span>
+      <span class="nav-label">Check-In</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('guide')" data-tab="guide">
+      <span class="nav-icon">♡</span>
+      <span class="nav-label">Guide</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('activities')" data-tab="activities">
+      <span class="nav-icon">⬡</span>
+      <span class="nav-label">Activities</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('history')" data-tab="history">
+      <span class="nav-icon">↻</span>
+      <span class="nav-label">History</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('settings')" data-tab="settings">
+      <span class="nav-icon">⚙</span>
+      <span class="nav-label">Settings</span>
+    </button>
+  </nav>
+
+</div><!-- end app-screen -->
+
+<script>
+// ===== SCREEN MANAGEMENT =====
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ===== CHECKOUT =====
+const plans = {
+  monthly: { name: 'Monthly Plan', price: '$14/mo' },
+  annual: { name: 'Annual Plan', price: '$99/yr' },
+  couple: { name: 'Couples Plan', price: '$149/yr' }
+};
+
+function openCheckout(plan) {
+  const p = plans[plan];
+  document.getElementById('checkout-summary').innerHTML =
+    `<span class="plan-name">${p.name}</span><span class="plan-price">${p.price}</span>`;
+  document.getElementById('checkout-modal').classList.add('open');
+}
+
+function closeCheckout() {
+  document.getElementById('checkout-modal').classList.remove('open');
+}
+
+function completePayment() {
+  closeCheckout();
+  enterApp();
+}
+
+function enterApp() {
+  showScreen('app-screen');
+  initApp();
+}
+
+// ===== ACCESS CODE =====
+const validCodes = ['HEART2024','LOVE-LOOP','GIFT-ACCESS','BETA-TEST','COUPLE-CODE'];
+
+function validateCode() {
+  const val = document.getElementById('access-code-input').value.trim().toUpperCase();
+  const err = document.getElementById('code-error');
+  if (validCodes.includes(val) || val.length >= 8) {
+    err.classList.remove('visible');
+    enterApp();
+  } else {
+    err.classList.add('visible');
+  }
+}
+
+// ===== TAB SWITCHING =====
+function switchTab(tab) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`#tab-${tab}`).classList.add('active');
+  document.querySelectorAll('.nav-tab, .topnav-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.tab === tab);
+  });
+  window.scrollTo(0, 0);
+}
+
+// ===== GUIDE SECTIONS =====
+function toggleGuideSection(header) {
+  const section = header.closest('.guide-section');
+  section.classList.toggle('open');
+}
+
+// ===== PULSE BARS =====
+function initPulseBars() {
+  const categories = [
+    { name: 'Connection', val: 72, color: 'var(--lavender-deep)' },
+    { name: 'Trust', val: 88, color: 'var(--lavender-mid)' },
+    { name: 'Intimacy', val: 60, color: 'var(--rose)' },
+    { name: 'Stress', val: 55, color: 'var(--dusty-rose)' },
+    { name: 'Fun', val: 78, color: 'var(--gold)' },
+    { name: 'Repair', val: 65, color: 'var(--blush-mid)' },
+    { name: 'Support', val: 82, color: 'var(--lavender-deep)' }
+  ];
+  const container = document.getElementById('pulse-bars');
+  container.innerHTML = categories.map(c => `
+    <div class="pulse-bar-wrap">
+      <div class="pulse-bar-fill" style="height:${c.val}%;background:${c.color};width:100%"></div>
+      <div class="pulse-bar-name">${c.name}</div>
+    </div>
+  `).join('');
+
+  const summary = document.getElementById('pulse-summary');
+  summary.innerHTML = `
+    <span class="pill-tag strength">Trust strong</span>
+    <span class="pill-tag attention">Intimacy dip</span>
+    <span class="pill-tag growing">Fun increasing</span>
+    <span class="pill-tag stable">Support stable</span>
+  `;
+}
+
+// ===== RADAR CHART =====
+function drawRadar() {
+  const svg = document.getElementById('radar-chart');
+  const cx = 150, cy = 150, r = 110;
+  const labels = ['Communication','Conflict','Intimacy','Trust','Quality Time','Fun','Support','Future'];
+  const scores = [0.65, 0.55, 0.60, 0.88, 0.70, 0.78, 0.82, 0.72];
+  const n = labels.length;
+  const colors = {
+    high: '#9b87e0',
+    mid: '#c9a96e',
+    low: '#c06b88'
+  };
+
+  function polar(i, radius) {
+    const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
+    return { x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle) };
+  }
+
+  // Grid circles
+  let html = '';
+  [0.25, 0.5, 0.75, 1].forEach(frac => {
+    html += `<circle cx="${cx}" cy="${cy}" r="${r * frac}" fill="none" stroke="rgba(196,181,240,0.25)" stroke-width="1"/>`;
+  });
+
+  // Grid lines
+  for (let i = 0; i < n; i++) {
+    const pt = polar(i, r);
+    html += `<line x1="${cx}" y1="${cy}" x2="${pt.x}" y2="${pt.y}" stroke="rgba(196,181,240,0.2)" stroke-width="1"/>`;
+  }
+
+  // Data polygon
+  const points = scores.map((s, i) => polar(i, r * s));
+  const poly = points.map(p => `${p.x},${p.y}`).join(' ');
+  html += `<polygon points="${poly}" fill="rgba(155,135,224,0.18)" stroke="var(--lavender-deep)" stroke-width="2"/>`;
+
+  // Data points
+  points.forEach((p, i) => {
+    const score = scores[i];
+    const color = score >= 0.75 ? colors.high : score >= 0.60 ? colors.mid : colors.low;
+    html += `<circle cx="${p.x}" cy="${p.y}" r="5" fill="${color}" stroke="white" stroke-width="2"/>`;
+  });
+
+  // Labels
+  for (let i = 0; i < n; i++) {
+    const pt = polar(i, r + 22);
+    const label = labels[i];
+    html += `<text x="${pt.x}" y="${pt.y}" text-anchor="middle" dominant-baseline="middle" 
+      fill="var(--text-mid)" font-size="9" font-family="DM Sans, sans-serif" font-weight="500">${label}</text>`;
+  }
+
+  svg.innerHTML = html;
+}
+
+// ===== MAP CATEGORIES =====
+const mapData = [
+  { name: 'Communication', status: 'attention', score: 65 },
+  { name: 'Trust', status: 'thriving', score: 88 },
+  { name: 'Emotional Intimacy', status: 'stable', score: 70 },
+  { name: 'Physical Intimacy', status: 'attention', score: 60 },
+  { name: 'Conflict Repair', status: 'stable', score: 68 },
+  { name: 'Quality Time', status: 'attention', score: 62 },
+  { name: 'Shared Fun', status: 'thriving', score: 78 },
+  { name: 'Life Stress', status: 'tense', score: 45 },
+  { name: 'Family Dynamics', status: 'stable', score: 72 },
+  { name: 'Future Goals', status: 'thriving', score: 80 },
+  { name: 'Support / Seen', status: 'thriving', score: 82 },
+  { name: 'Independence', status: 'stable', score: 74 }
+];
+
+const statusLabels = { thriving: 'Thriving', stable: 'Stable', attention: 'Needs Attention', tense: 'Tense' };
+
+function initMapCategories() {
+  const el = document.getElementById('map-categories');
+  el.innerHTML = mapData.map(d => `
+    <div class="cat-row" onclick="alert('${d.name}: ${statusLabels[d.status]} (${d.score}%) — In the full app, this opens a detailed view with suggested questions and tips.')">
+      <div class="cat-row-name">${d.name}</div>
+      <div class="cat-bar">
+        <div class="cat-bar-fill ${d.status}" style="width:${d.score}%"></div>
+      </div>
+      <div class="cat-status ${d.status}">${statusLabels[d.status]}</div>
+    </div>
+  `).join('');
+}
+
+// ===== INTAKE QUESTIONS =====
+const intakeQuestions = [
+  {
+    section: 'Relationship Climate',
+    text: 'How connected have you felt to your partner lately?',
+    hint: 'Think about the past 2–3 weeks overall.',
+    type: 'options',
+    options: [
+      { emoji: '🌟', label: 'Very connected — we\'ve been in a good place' },
+      { emoji: '🌿', label: 'Mostly connected — some small distance here and there' },
+      { emoji: '🌥', label: 'Somewhat disconnected — we\'re ships passing a bit' },
+      { emoji: '🌧', label: 'Pretty disconnected — something feels off' }
+    ]
+  },
+  {
+    section: 'Relationship Climate',
+    text: 'How supported do you feel right now?',
+    hint: 'Emotionally, logistically, all of it.',
+    type: 'scale',
+    min: 'Not at all', max: 'Completely'
+  },
+  {
+    section: 'Recent Issues',
+    text: 'Have you had any recent conflicts or recurring disagreements?',
+    hint: 'Be honest — even small friction counts.',
+    type: 'options',
+    options: [
+      { emoji: '☀️', label: 'No — things have been really smooth' },
+      { emoji: '🌤', label: 'Minor friction, nothing major' },
+      { emoji: '🌦', label: 'Yes — a few things that came up' },
+      { emoji: '⛈', label: 'Yes — some significant conflict' }
+    ]
+  },
+  {
+    section: 'Emotional Patterns',
+    text: 'When things get tense, what do you tend to do?',
+    hint: 'No judgment — awareness is the starting point.',
+    type: 'options',
+    options: [
+      { emoji: '💬', label: 'I try to talk it through immediately' },
+      { emoji: '🚪', label: 'I need space first before I can engage' },
+      { emoji: '😶', label: 'I shut down or go quiet' },
+      { emoji: '🔄', label: 'I over-explain or try to fix it quickly' }
+    ]
+  },
+  {
+    section: 'Positives & Strengths',
+    text: 'What has been going really well lately?',
+    hint: 'Let yourself acknowledge what\'s working.',
+    type: 'options',
+    options: [
+      { emoji: '😂', label: 'We\'ve been laughing and having fun' },
+      { emoji: '🤝', label: 'We\'ve felt like a real team' },
+      { emoji: '💕', label: 'Physical affection has been good' },
+      { emoji: '🗓', label: 'We\'ve been doing well at quality time' }
+    ]
+  },
+  {
+    section: 'Life Stress',
+    text: 'How much external life stress are you navigating right now?',
+    hint: 'Work, family, health, finances, transitions...',
+    type: 'scale',
+    min: 'Very calm', max: 'Overwhelmed'
+  },
+  {
+    section: 'Intimacy',
+    text: 'How has physical intimacy felt lately?',
+    hint: 'This is completely optional and handled with care.',
+    type: 'options',
+    options: [
+      { emoji: '💫', label: 'Satisfying and connected' },
+      { emoji: '🌿', label: 'Fine, fairly neutral' },
+      { emoji: '🌥', label: 'A bit distant or mismatched' },
+      { emoji: '⏸', label: 'Paused or not a focus right now' }
+    ]
+  },
+  {
+    section: 'Communication',
+    text: 'How well does your partner seem to understand you lately?',
+    hint: 'Think about feeling heard and seen.',
+    type: 'scale',
+    min: 'Not at all', max: 'Completely seen'
+  },
+  {
+    section: 'Activity Preferences',
+    text: 'What kind of energy do you want around your next check-in?',
+    hint: 'This helps us suggest the right pairing.',
+    type: 'options',
+    options: [
+      { emoji: '🕯', label: 'Cozy — blankets, warmth, no pressure' },
+      { emoji: '🚶', label: 'Active — walking, moving, outdoors' },
+      { emoji: '🍽', label: 'Domestic — cooking, eating together' },
+      { emoji: '🌙', label: 'Quiet — low energy, end of day' }
+    ]
+  },
+  {
+    section: 'Attachment Style',
+    text: 'How would you describe your attachment tendencies in relationships?',
+    hint: 'This helps us pace and word things for you.',
+    type: 'options',
+    options: [
+      { emoji: '🔐', label: 'Secure — generally comfortable with closeness' },
+      { emoji: '🌊', label: 'Anxious — I sometimes worry about the relationship' },
+      { emoji: '🏔', label: 'Avoidant — I can struggle with too much closeness' },
+      { emoji: '🌀', label: 'Mixed / unsure — depends on the situation' }
+    ]
+  },
+  {
+    section: 'Life Transitions',
+    text: 'Have there been any major life changes recently?',
+    hint: 'These affect everything — even when they seem unrelated.',
+    type: 'options',
+    options: [
+      { emoji: '✨', label: 'No major changes right now' },
+      { emoji: '💼', label: 'Work / career shift or stress' },
+      { emoji: '🏠', label: 'Move, family change, or housing shift' },
+      { emoji: '💔', label: 'Loss, health issue, or grief' }
+    ]
+  },
+  {
+    section: 'Check-In Preference',
+    text: 'How deep do you want this week\'s check-in to go?',
+    hint: 'There\'s no wrong answer — meet yourself where you are.',
+    type: 'options',
+    options: [
+      { emoji: '🌱', label: 'Light — just a quick tune-in' },
+      { emoji: '🌿', label: 'Moderate — some depth, still gentle' },
+      { emoji: '🌳', label: 'Deep — we\'re ready for real conversation' }
+    ]
+  }
+];
+
+let currentQuestion = 0;
+const answers = {};
+
+function renderQuestion() {
+  const q = intakeQuestions[currentQuestion];
+  const el = document.getElementById('intake-questions');
+  const progress = ((currentQuestion + 1) / intakeQuestions.length) * 100;
+  document.getElementById('intake-progress-bar').style.width = progress + '%';
+  document.getElementById('intake-progress-text').textContent = `${currentQuestion + 1} of ${intakeQuestions.length}`;
+
+  document.getElementById('intake-prev-btn').style.display = currentQuestion > 0 ? 'block' : 'none';
+  document.getElementById('intake-next-btn').textContent =
+    currentQuestion === intakeQuestions.length - 1 ? 'Complete Reflection ✓' : 'Continue →';
+
+  let inner = `
+    <div class="question-card">
+      <span class="question-section-tag">${q.section}</span>
+      <div class="question-text">${q.text}</div>
+      ${q.hint ? `<div class="question-hint">${q.hint}</div>` : ''}
+  `;
+
+  if (q.type === 'options') {
+    inner += `<div class="options-grid">`;
+    q.options.forEach((opt, i) => {
+      const sel = answers[currentQuestion] === i ? 'selected' : '';
+      inner += `
+        <button class="option-btn ${sel}" onclick="selectOption(${i})">
+          <span class="option-emoji">${opt.emoji}</span>
+          ${opt.label}
+        </button>
+      `;
+    });
+    inner += `</div>`;
+  } else if (q.type === 'scale') {
+    inner += `<div class="scale-row">`;
+    for (let i = 1; i <= 5; i++) {
+      const sel = answers[currentQuestion] === i ? 'selected' : '';
+      inner += `<button class="scale-btn ${sel}" onclick="selectScale(${i})">${i}</button>`;
+    }
+    inner += `</div>`;
+    inner += `<div class="scale-labels"><span>${q.min}</span><span>${q.max}</span></div>`;
+  }
+
+  inner += `</div>`;
+  el.innerHTML = inner;
+}
+
+function selectOption(idx) {
+  answers[currentQuestion] = idx;
+  document.querySelectorAll('.option-btn').forEach((b, i) => b.classList.toggle('selected', i === idx));
+}
+
+function selectScale(val) {
+  answers[currentQuestion] = val;
+  document.querySelectorAll('.scale-btn').forEach((b, i) => b.classList.toggle('selected', i + 1 === val));
+}
+
+function intakeNext() {
+  if (currentQuestion < intakeQuestions.length - 1) {
+    currentQuestion++;
+    renderQuestion();
+  } else {
+    // Complete
+    document.getElementById('intake-questions').innerHTML = `
+      <div class="question-card" style="text-align:center;padding:2.5rem 1.5rem;">
+        <div style="font-size:48px;margin-bottom:1rem;">🌸</div>
+        <div class="question-text" style="margin-bottom:0.8rem;">Reflection complete.</div>
+        <p style="font-size:15px;color:var(--text-mid);font-weight:300;line-height:1.65;margin-bottom:1.5rem;">
+          Thank you for taking the time to check in with yourself. Your Relationship Map and personalized Check-In have been updated.
+        </p>
+        <button class="btn-primary" onclick="switchTab('home')">View Your Dashboard →</button>
+      </div>
+    `;
+    document.getElementById('intake-nav').style.display = 'none';
+    document.getElementById('intake-progress-bar').style.width = '100%';
+  }
+}
+
+function intakePrev() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    renderQuestion();
+  }
+}
+
+// ===== BUILDER QUESTIONS =====
+const builderQs = [
+  'What\'s one thing your partner did this week that you noticed and appreciated, even if you didn\'t say it?',
+  'Have you felt heard in your day-to-day conversations lately? Where has that felt off?',
+  'What would "more connected" actually look like for you right now — in specific, practical terms?',
+  'Is there anything from the last few weeks you want to revisit, gently?',
+  'What are you each looking forward to in the next month, individually and together?'
+];
+
+function initBuilderQuestions() {
+  const el = document.getElementById('builder-questions');
+  el.innerHTML = builderQs.map((q, i) => `
+    <li class="question-item">
+      <div class="q-num">${i + 1}</div>
+      <div class="q-text">${q}</div>
+    </li>
+  `).join('');
+}
+
+// ===== HISTORY TRENDS =====
+const trends = [
+  { label: 'Connection', val: 72 },
+  { label: 'Intimacy', val: 58 },
+  { label: 'Communication', val: 63 },
+  { label: 'Shared Fun', val: 79 },
+  { label: 'Conflict Repair', val: 66 },
+  { label: 'Support', val: 81 }
+];
+
+const pastCheckIns = [
+  { date: 'March 22', type: 'Connection Boost', depth: 'Light-Moderate', mood: '🌿' },
+  { date: 'March 8', type: 'Maintenance Check-In', depth: 'Light', mood: '☀️' },
+  { date: 'Feb 29', type: 'Stress Spillover', depth: 'Deep', mood: '🌧' },
+  { date: 'Feb 14', type: 'Intimacy Reconnect', depth: 'Moderate', mood: '🌸' }
+];
+
+function initHistory() {
+  const tEl = document.getElementById('trend-rows');
+  tEl.innerHTML = trends.map(t => `
+    <div class="trend-row">
+      <div class="trend-label">${t.label}</div>
+      <div class="trend-bar-outer">
+        <div class="trend-bar-fill" style="width:${t.val}%"></div>
+      </div>
+      <div class="trend-val">${t.val}%</div>
+    </div>
+  `).join('');
+
+  const cEl = document.getElementById('checkin-history');
+  cEl.innerHTML = pastCheckIns.map(c => `
+    <div class="card-sm" style="margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:20px;">${c.mood}</span>
+        <div>
+          <div style="font-family:var(--font-display);font-size:1rem;color:var(--text-dark);font-weight:400;">${c.type}</div>
+          <div style="font-size:12px;color:var(--text-soft);font-weight:300;">${c.date} · ${c.depth}</div>
+        </div>
+      </div>
+      <button class="btn-ghost" style="font-size:12px;text-decoration:none;">View →</button>
+    </div>
+  `).join('');
+}
+
+function markCheckInDone() {
+  alert('Check-in marked complete! Your relationship map and trends have been updated. Well done — this is an act of care.');
+}
+
+// ===== INIT APP =====
+function initApp() {
+  initPulseBars();
+  drawRadar();
+  initMapCategories();
+  renderQuestion();
+  initBuilderQuestions();
+  initHistory();
+}
+
+// ===== CLOSE MODAL ON BACKDROP =====
+document.getElementById('checkout-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeCheckout();
+});
+</script>
+</body>
+</html>
